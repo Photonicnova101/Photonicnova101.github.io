@@ -1,2 +1,2 @@
 # Photonicnova101.github.io
-Portfolio Website
+This is Sam Pautrat's Porfolio Website
