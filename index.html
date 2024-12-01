@@ -1,1 +1,91 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/portfolio/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/portfolio/logo192.png"/><link rel="manifest" href="/portfolio/manifest.json"/><title>React App</title><script defer="defer" src="/portfolio/static/js/main.f9cb8885.js"></script><link href="/portfolio/static/css/main.aab210d9.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React App Equivalent</title>
+  <!-- Include React and ReactDOM from a CDN -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Include Babel for JSX Transformation -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Inline React Components -->
+  <script type="text/babel">
+    const Header = ({ onScrollToAbout, onScrollToProjects, onScrollToResume }) => (
+      <header>
+        <nav>
+          <ul>
+            <li><button onClick={onScrollToAbout}>About</button></li>
+            <li><button onClick={onScrollToProjects}>Projects</button></li>
+            <li><button onClick={onScrollToResume}>Resume</button></li>
+          </ul>
+        </nav>
+      </header>
+    );
+
+    const About = () => (
+      <div className="section">
+        <h2>About Me</h2>
+        <p>This is the About section where you can describe yourself.</p>
+      </div>
+    );
+
+    const Projects = () => (
+      <div className="section">
+        <h2>Projects</h2>
+        <p>This is the Projects section showcasing your work.</p>
+      </div>
+    );
+
+    const Resume = () => (
+      <div className="section">
+        <h2>Resume</h2>
+        <p>This is the Resume section where you can share your CV or work experience.</p>
+      </div>
+    );
+
+    const App = () => {
+      const aboutRef = React.useRef(null);
+      const projectsRef = React.useRef(null);
+      const resumeRef = React.useRef(null);
+
+      const scrollToSection = (ref) => {
+        window.scrollTo({
+          top: ref.current.offsetTop,
+          behavior: 'smooth',
+        });
+      };
+
+      return (
+        <div>
+          <Header
+            onScrollToAbout={() => scrollToSection(aboutRef)}
+            onScrollToProjects={() => scrollToSection(projectsRef)}
+            onScrollToResume={() => scrollToSection(resumeRef)}
+          />
+          <main>
+            <section ref={aboutRef}>
+              <About />
+            </section>
+            <section ref={projectsRef}>
+              <Projects />
+            </section>
+            <section ref={resumeRef}>
+              <Resume />
+            </section>
+          </main>
+        </div>
+      );
+    };
+
+    // Render App component into the DOM
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
